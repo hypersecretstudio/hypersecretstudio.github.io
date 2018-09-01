@@ -21,8 +21,8 @@ function randomEmoji() {
   let randIndex = Math.floor(Math.random() * EMOJIS.length);
   return EMOJIS[randIndex];
 }
-
-const SPOOKY_TEXT = 'THE INTERNET IS WATCHING YOU!'
+const NEW_LINE = '$'
+const SPOOKY_TEXT = 'HYPER SECRET STUDIO IS GOING UNDER RECONSTRUCTION.' + NEW_LINE + '🚧 🏗 👷'
 
 
 let index = 0;
@@ -34,6 +34,7 @@ if (selectedText != '') {
     let myDiv = document.getElementById('spooky-text');
     if (write) {
       let letter = selectedText[index];
+      if (letter === NEW_LINE) letter = '<br>'
       myDiv.innerHTML += letter;
       myDiv.scrollTop = myDiv.scrollHeight;
       index++;
