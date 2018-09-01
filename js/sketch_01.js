@@ -26,7 +26,7 @@ function randomEmoji() {
   return EMOJIS[randIndex];
 }
 const NEW_LINE = '$'
-const SPOOKY_TEXT =  '🚧 🏗 👷'+ NEW_LINE + 'HYPER SECRET STUDIO IS GOING UNDER CONSTRUCTION'
+const SPOOKY_TEXT = '🚧 🏗 👷' + NEW_LINE + 'HYPER SECRET STUDIO IS GOING UNDER CONSTRUCTION'
 
 
 let index = 0;
@@ -74,14 +74,43 @@ let rot = 0;
 let start = false;
 let startCount = 0;
 let cnv;
+let uniformsShader;
+function preload() {
+  uniformsShader = loadShader('vertex.vert', 'drip.frag');
+}
 function setup() {
   cnv = createCanvas(innerWidth, innerHeight, WEBGL);
   cnv.parent('p5Sketch');
   noStroke();
+  rectMode(CENTER);
 }
 
 function draw() {
-  background(0);
+  background(20, 20, 220);
+
+  /**
+   * SHADEER STUFF
+   */
+  shader(uniformsShader);
+  rect(0, 0, width, height);
+  let mx = map(mouseX, 0, width, 0, 1);
+  let my = map(mouseY, 0, height, 0, 1);
+  // lets just send frameCount to the shader as a way to control animation over time
+  uniformsShader.setUniform('u_time', millis() / 1000);
+  // // uniformsShader.setUniform('u_mouse', [mx, my]);
+  uniformsShader.setUniform('u_resolution', [width, height]);
+  //drip uniforms
+  uniformsShader.setUniform('intense', 0.5);
+  uniformsShader.setUniform('speed', 1.0);
+  uniformsShader.setUniform('graininess', [mx, my]);
+  uniformsShader.setUniform('u_mouse1', returnRGBcolor()[0]);
+  uniformsShader.setUniform('u_mouse2', returnRGBcolor()[1]);
+
+
+
+  // fill(0, 150);
+  // rect(0, 0, width, height);
+
   ortho();
   var locY = (mouseY / height - 0.5) * (-2);
   var locX = (mouseX / width - 0.5) * 2;
@@ -92,8 +121,8 @@ function draw() {
   // let x = map(sx, -9, 9, -width * 0.85, width * 0.85);
   let rotx = map(mouseX, 0, width, -PI, PI);
   let roty = map(mouseY, 0, height, -PI, PI);
-
-
+  push();
+  translate(0, 0, 300);
   rotateY(rotx);
   rotateZ(roty)
   sphere(cylH / 2);
@@ -103,8 +132,8 @@ function draw() {
     HOOP(angle);
     ballInHOOP(angle);
   }
+  pop();
 
-  
   rot += PI / 550;
 }
 
@@ -112,11 +141,11 @@ function windowResized() {
   resizeCanvas(innerWidth, innerHeight, WEBGL);
 }
 
-function ballInHOOP(start){
+function ballInHOOP(start) {
   push();
   rotateX(start + rot * 4);
   translate(0, cylH)
-  let bottom  = (-cylH / 2) + torD * 0.85;
+  let bottom = (-cylH / 2) + torD * 0.85;
   let top = cylH - torD
   let sphereH = map(abs(cos((rot * 6))), 0, 1, bottom, top);
   translate(0, sphereH);
@@ -144,6 +173,36 @@ function updateFormIndex(val) {
   }
   return val;
 }
+
+
+
+/**
+ * @returns an array of colors to be used as vec3 uniform in the shader
+ */
+function returnRGBcolor() {
+  let color1 = [];
+  let color2 = [];
+  let x = map(mouseX, 0, width, 0, 255);
+  let y = map(mouseY, 0, height, 0, 255);
+  // if is color mode
+  colorMode(HSB);
+
+  let col1 = color(x, 255, 255);
+  let col2 = color(y, 255, 255);
+
+  color1[0] = map(red(col1), 0, 255, 0, 1);
+  color1[1] = map(green(col1), 0, 255, 0, 1);
+  color1[2] = map(blue(col1), 0, 255, 0, 1);
+
+  color2[0] = map(red(col2), 0, 255, 0, 1);
+  color2[1] = map(green(col2), 0, 255, 0, 1);
+  color2[2] = map(blue(col2), 0, 255, 0, 1);
+
+  colorMode(RGB);
+  return [color1, color2];
+}
+
+
 
 /**
  * DEVICE MOTION
