@@ -1,9 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:500,900&subset=latin-ext');
 @import url('https://fonts.googleapis.com/css?family=Cormorant:700|EB+Garamond:500');
+@font-face {
+    font-family: 'monument';
+    src:  url('font/MonumentGroteskTrial-Bold.woff') format('woff2');
+  }
 body {
     padding: 0;
     margin: 0;
-    font-family: 'Source Code Pro', monospace;
+    /* font-family: 'Source Code Pro', monospace; */
+    font-family: 'monument';
     font-size: 100%;
 }
 #spooky-text{
@@ -16,9 +21,9 @@ body {
     -moz-transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
     text-align: center;
-    font-size: 3em;
-    color: #000;
-    text-shadow: 2px 2px #f00;
+    font-size: 6em;
+    color: #ffffff77;
+    /* text-shadow: 2px 2px #f00; */
     font-weight: bolder;
     line-height: 1em;
     hyphens: none;
@@ -43,6 +48,12 @@ body {
 #contact:hover{
     font-size: 2em;
     color: #f00;
+}
+
+#mail:hover{
+    font-style: normal;
+    letter-spacing: 3px;
+    color: #00f;
 }
 
 /* custom scrollbars */
