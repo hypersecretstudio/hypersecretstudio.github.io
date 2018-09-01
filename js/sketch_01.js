@@ -26,7 +26,7 @@ function randomEmoji() {
   return EMOJIS[randIndex];
 }
 const NEW_LINE = '$'
-const SPOOKY_TEXT =  '🚧 🏗 👷'+ NEW_LINE + 'HYPER SECRET STUDIO IS GOING UNDER CONSTRUCTION.'
+const SPOOKY_TEXT =  '🚧 🏗 👷'+ NEW_LINE + 'HYPER SECRET STUDIO IS GOING UNDER CONSTRUCTION'
 
 
 let index = 0;

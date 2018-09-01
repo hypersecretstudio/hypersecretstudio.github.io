@@ -42,12 +42,12 @@ body {
     bottom: 0px;
     font-style: italic;
     color: #000;
-    text-shadow: 2px 2px #0f0;
+    text-shadow: 2px 2px #2d7;
     line-height: 1em;
 }
 #contact:hover{
     font-size: 2em;
-    color: #f00;
+    /* color: #fff; */
 }
 
 #mail:hover{
