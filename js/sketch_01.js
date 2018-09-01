@@ -91,8 +91,10 @@ function draw() {
   /**
    * SHADEER STUFF
    */
+  push();
   shader(uniformsShader);
   rect(0, 0, width, height);
+  pop();
   let mx = map(mouseX, 0, width, 0, 1);
   let my = map(mouseY, 0, height, 0, 1);
   // lets just send frameCount to the shader as a way to control animation over time
