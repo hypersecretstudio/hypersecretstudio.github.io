@@ -26,7 +26,7 @@ function randomEmoji() {
   return EMOJIS[randIndex];
 }
 const NEW_LINE = '$'
-const SPOOKY_TEXT = '🚧 🏗 👷' + NEW_LINE + 'HYPER SECRET STUDIO IS GOING UNDER CONSTRUCTION'
+const SPOOKY_TEXT = '🚧 🏗 👷' + NEW_LINE + 'HYPER SECRET STUDIO IS UNDER CONSTRUCTION'
 
 
 let index = 0;
@@ -71,10 +71,13 @@ let cylH = 150;
 let torD = 30;
 let r = 5;
 let rot = 0;
+let mx;
+let my;
 let start = false;
 let startCount = 0;
 let cnv;
 let uniformsShader;
+let isMobile = false;
 function preload() {
   uniformsShader = loadShader('vertex.vert', 'drip.frag');
 }
@@ -83,23 +86,44 @@ function setup() {
   cnv.parent('p5Sketch');
   noStroke();
   rectMode(CENTER);
+  /**
+   * MOBILE CHECK
+   */
+
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    isMobile = true;
+    console.log('is mobile!');
+  } else {
+    isMobile = false;
+  }
 }
 
 function draw() {
   background(20, 20, 220);
 
+
+
   /**
-   * SHADEER STUFF
+   * SHADER STUFF
    */
   push();
   shader(uniformsShader);
   rect(0, 0, width, height);
   pop();
-  let mx = map(mouseX, 0, width, 0, 1);
-  let my = map(mouseY, 0, height, 0, 1);
+  if (isMobile) {
+    // if is mobile than we track the device rotation
+    // console.log('SX ' + sx);
+    // console.log('SY ' + sy);
+    mx = constrain(map(sx, -9, 9, 0, 1), 0, 1);
+    my = constrain(map(sy, -9, 9, 0, 1), 0, 1);
+    // console.log(mx, my);
+  } else {
+    // we track the mouse
+    mx = map(mouseX, 0, width, 0, 1);
+    my = map(mouseY, 0, height, 0, 1);
+  }
   // lets just send frameCount to the shader as a way to control animation over time
   uniformsShader.setUniform('u_time', millis() / 1000);
-  // // uniformsShader.setUniform('u_mouse', [mx, my]);
   uniformsShader.setUniform('u_resolution', [width, height]);
   //drip uniforms
   uniformsShader.setUniform('intense', 0.5);
@@ -109,24 +133,19 @@ function draw() {
   uniformsShader.setUniform('u_mouse2', returnRGBcolor()[1]);
 
 
-
-  // fill(0, 150);
-  // rect(0, 0, width, height);
-
+  /**
+   * 3D rendering
+   */
   ortho();
-  var locY = (mouseY / height - 0.5) * (-2);
-  var locX = (mouseX / width - 0.5) * 2;
-
-  ambientLight(100, 80, 80);
-  pointLight(200, 200, 200, locX, locY, 0);
   normalMaterial();
-  // let x = map(sx, -9, 9, -width * 0.85, width * 0.85);
-  let rotx = map(mouseX, 0, width, -PI, PI);
-  let roty = map(mouseY, 0, height, -PI, PI);
+
+  // ANIMATION
+  let rotx = map(mx, 0, 1, -PI, PI);
+  let roty = map(my, 0, 1, -PI, PI);
   push();
   translate(0, 0, 300);
+  rotateZ(roty);
   rotateY(rotx);
-  rotateZ(roty)
   sphere(cylH / 2);
   let looop = 4;
   for (let i = 0; i < looop; i++) {
@@ -184,8 +203,16 @@ function updateFormIndex(val) {
 function returnRGBcolor() {
   let color1 = [];
   let color2 = [];
-  let x = map(mouseX, 0, width, 0, 255);
-  let y = map(mouseY, 0, height, 0, 255);
+  let x;
+  let y;
+  if (isMobile) {
+
+    x = map(mx, 0, 1, 0, 255);
+    y = map(my, 0, 1, 0, 255);
+  } else {
+    x = map(mouseX, 0, width, 0, 255);
+    y = map(mouseY, 0, height, 0, 255);
+  }
   // if is color mode
   colorMode(HSB);
 
