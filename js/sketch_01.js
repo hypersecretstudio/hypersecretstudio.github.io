@@ -36,8 +36,9 @@ window.onmousemove = event => {
   posy = event.clientY;
   const popup = document.getElementById('click-me');
   const h = popup.getBoundingClientRect().height;
-  popup.style.top = (posy - h) + 'px';
-  popup.style.left = posx + 'px';
+  const w = popup.getBoundingClientRect().width;
+  popup.style.top = (posy - (h * 1.2)) + 'px';
+  popup.style.left = (posx - (w / 2)) + 'px';
 }
 
 const links = document.getElementsByClassName('links');

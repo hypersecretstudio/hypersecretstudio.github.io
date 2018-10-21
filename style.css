@@ -52,6 +52,7 @@ body {
 
 #click-me{
     display: none;
+    text-align: center;
     position: fixed;
     word-wrap: break-word;
     width: 150px;
