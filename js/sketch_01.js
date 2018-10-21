@@ -28,30 +28,56 @@ function randomEmoji() {
 const NEW_LINE = '$'
 const SPOOKY_TEXT = '🚧 🏗 👷' + NEW_LINE + 'HYPER SECRET STUDIO IS UNDER CONSTRUCTION'
 
+let posx;
+let posy;
 
-let index = 0;
-selectedText = '';
-write = true;
-selectedText = SPOOKY_TEXT.split('');
-if (selectedText != '') {
-  SI = setInterval(() => {
-    let myDiv = document.getElementById('spooky-text');
-    if (write) {
-      let letter = selectedText[index];
-      if (letter === NEW_LINE) letter = '<br>'
-      myDiv.innerHTML += letter;
-      myDiv.scrollTop = myDiv.scrollHeight;
-      index++;
-    }
-    if (index >= selectedText.length) {
-      write = false;
-      setTimeout(() => {
-        clearInterval(SI);
-      }, 2000);
-    }
-  }, 100);
-
+window.onmousemove = event => {
+  posx = event.clientX;
+  posy = event.clientY;
+  const popup = document.getElementById('click-me');
+  const h = popup.getBoundingClientRect().height;
+  popup.style.top = (posy - h) + 'px';
+  popup.style.left = posx + 'px';
 }
+
+const links = document.getElementsByClassName('links');
+for (const link of links) {
+  link.addEventListener('mouseover', event => {
+    showLinkDescription = true;
+    document.getElementById('click-me').style.display = 'block';
+  })
+  link.addEventListener('mouseleave', event =>{
+    showLinkDescription = false;
+  
+    document.getElementById('click-me').style.display = 'none';
+  })
+}
+
+
+
+// let index = 0;
+// selectedText = '';
+// write = true;
+// selectedText = SPOOKY_TEXT.split('');
+// if (selectedText != '') {
+//   SI = setInterval(() => {
+//     let myDiv = document.getElementById('spooky-text');
+//     if (write) {
+//       let letter = selectedText[index];
+//       if (letter === NEW_LINE) letter = '<br>'
+//       myDiv.innerHTML += letter;
+//       myDiv.scrollTop = myDiv.scrollHeight;
+//       index++;
+//     }
+//     if (index >= selectedText.length) {
+//       write = false;
+//       setTimeout(() => {
+//         clearInterval(SI);
+//       }, 2000);
+//     }
+//   }, 100);
+
+// }
 
 
 

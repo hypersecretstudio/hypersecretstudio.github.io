@@ -11,16 +11,59 @@ body {
     font-family: 'monument';
     font-size: 100%;
 }
-#spooky-text{
+.container, #spooky-text{
     position: fixed;
-
     left: 50%;
     top: 50%;
-    width: 50%;
-    min-width: 300px;
     transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
+
+}
+
+.container{
+    width: 120px;
+    padding: 0.6em;
+    overflow-y: scroll;
+    -webkit-transition: width 2s, -webkit-transform 2s;
+    /* Safari */
+    -ms-transition: width 2s, -ms-transform 2s;
+    /* mozilla */
+    transition: width 2s, transform 2s;
+    word-wrap: break-word;
+
+    font-size: 200%;
+    background-color: rgba(0, 0, 255, 0.404);
+    color: #ff0;
+    border: solid #00f 5px;
+    box-shadow: #aaa 30px 30px;
+}
+.container:hover{
+    width: 75%;
+}
+
+.container a{
+    color: #0f0;
+}
+
+.container a:hover{
+    color: #f00;
+}
+
+#click-me{
+    display: none;
+    position: fixed;
+    word-wrap: break-word;
+    width: 150px;
+    height: auto;
+    color: #00f;
+    font-weight: bolder;
+    text-decoration: underline #fff;
+}
+
+#spooky-text{
+    width: 50%;
+    min-width: 300px;
     text-align: center;
     font-size: 8vh;
     color: #ccc;
@@ -29,7 +72,7 @@ body {
     line-height: 1em;
     /* hyphens: auto; */
     word-wrap: break-word;
-    text-decoration: underline blue;
+    /* text-decoration: underline blue; */
 }
 #p5Sketch{
     position: fixed;
