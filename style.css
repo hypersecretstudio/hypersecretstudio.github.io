@@ -32,7 +32,7 @@ body {
     transition: width 2s, transform 2s;
     word-wrap: break-word;
 
-    font-size: 200%;
+    font-size: 3vh;
     background-color: rgba(0, 0, 255, 0.404);
     color: #ff0;
     border: solid #00f 5px;
