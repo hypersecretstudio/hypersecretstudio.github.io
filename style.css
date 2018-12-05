@@ -79,17 +79,20 @@ body {
     box-shadow: 3px 3px #00f;
     border-radius: 0px;
 }
-/* .header:hover{
-    background-color: #ff0;
+.header:hover{
+    /* background-color: #ff0; */
     box-shadow: 5px 5px #00f;
-    border-radius: 50px;
-} */
+    /* border-radius: 50px; */
+}
 .header span:hover{
     font-size: 6vh;
     color: #fff;
     text-shadow: 4px 4px #00f;
 }
-
+.content{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 #click-me{
     display: none;
     text-align: center;
