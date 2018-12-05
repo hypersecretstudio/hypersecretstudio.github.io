@@ -7,6 +7,8 @@
   <meta name="description" content="">
 
   <title>🐋</title>
+  <script src="js/libraries/jquery-3.3.1.min.js"></script>
+  <script src="js/libraries/jquery.lettering-0.6.1.min.js"></script>
   <script src="js/libraries/p5.min.js"></script>
   <script src="js/libraries/p5.dom.min.js"></script>
   <link rel="stylesheet" href="style.css">
@@ -14,26 +16,32 @@
 
 <body>
   <div id="p5Sketch"></div>
-  <div id="spooky-text"></div>
+  <!-- <div id="spooky-text"></div> -->
   <div class="container">
     <p>
-      Hyper secret studio is <a class="links" href="https://ariannasmaron.it/" target="_blank">Arianna</a> and <a class="links"
+      <div class="header">
+        WEB || INTERACTION || PRINT || OPEN SOURCE
+      </div>
+      hyper secret studio is <a class="links" href="https://ariannasmaron.it/" target="_blank">Arianna</a> and <a class="links"
         href="http://yyyyyyyy.xyz/" target="_blank">Yann</a>. <br>
       We like to explore the limits of visual language always armed with critical and political thinking. We like to
       investigate and research in our work in order to produce design that is <u>aware</u>.
     </p>
-    <p>
-      for enquiries please contact us here: <br>
-      <span id="mail">
+    <div class="footer">
+      <span style="font-size: 4vh;">📮 ➡️ 📬</span><br>
+      <div id="mail">
         secret [at] hypersecret.studio
-      </span>
-    </p>
+      </div>
+    </div>
   </div>
   <div id="click-me">
     💼<br>click those links to see our portfolios!<br>💼
   </div>
 
   <script src="js/sketch_01.js"></script>
+  <script>
+    $(document).ready(() => $('.header').lettering());
+  </script>
 </body>
 
 </html>
