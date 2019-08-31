@@ -11,36 +11,87 @@
   <script src="js/libraries/jquery.lettering-0.6.1.min.js"></script>
   <script src="js/libraries/p5.min.js"></script>
   <script src="js/libraries/p5.dom.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <div id="p5Sketch"></div>
-  <!-- <div id="spooky-text"></div> -->
-  <div class="container">
-    <div class="header">
-      WEB || INTERACTION || PRINT || OPEN SOURCE
-    </div>
-    <div class="content">
-      hyper secret studio is <a class="links" href="https://ariannasmaron.it/" target="_blank">Arianna</a> and <a class="links"
-        href="http://yyyyyyyy.xyz/" target="_blank">Yann</a>. <br>
-      We like to explore the limits of visual language always armed with critical and political thinking. We like to
-      investigate and research in our work in order to produce design that is <u>aware</u>.
-    </div>
-    <div class="footer">
-      <span style="font-size: 4vh;">📮 ➡️ 📬</span><br>
-      <div id="mail">
-        secret [at] hypersecret.studio
+
+  <div class="main-carousel">
+
+
+    <div class="carousel-cell">
+      <div class="outer center-item">
+        <div class="container">
+          <div class="header">
+            WEB || INTERACTION || PRINT || OPEN SOURCE
+          </div>
+          <div class="content">
+            hyper secret studio is <a class="links" href="https://ariannasmaron.it/" data-img="img/ari.jpeg"
+              target="_blank">Arianna</a> and <a class="links" href="http://yyyyyyyy.xyz/" data-img="img/yano.jpg"
+              target="_blank">Yann</a>. <br>
+            We like to explore the limits of visual language always armed with critical and political thinking. We like
+            to
+            investigate and research in our work in order to produce design that is <u>aware</u>.
+          </div>
+          <div class="footer">
+
+            <div id="mail">
+              <a href="mailto:secret@hypersecret.studio?subject=WE WANT YOU TO DESIGN OUR: &body=Name: %0D%0A %0D%0A %0D%0A ****************************************%0D%0A %0D%0A %0D%0AContacts: mail|website|phone%0D%0A %0D%0A %0D%0A  ****************************************%0D%0A %0D%0A %0D%0A🌈🌈🌈WITH LOVE LOVE LOVE 🌈🌈🌈" style="text-decoration: none;"><span style="font-size: 4vh;">📮 ➡️ 📬</span></a>
+
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+
+
+
+    <div class="carousel-cell">
+      <div class="outer center-item">
+        <div class="container">
+          <div class="header">
+            WEBSITE >> JONAS GILLMANN
+          </div>
+          <div class="content">
+            hyper secret studio made a joyful and colorful <a class="links" href="https://jonasgillmann.ch"
+              target="_blank" data-img="img/JG_01.png">website</a> for the theater regisseur and dramaturg Jonas
+            Gillmann
+          </div>
+          <!-- <div class="footer">
+            <span style="font-size: 4vh;">📮 ➡️ 📬</span><br>
+            <div id="mail">
+              secret [at] hypersecret.studio
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+
+
   </div>
+
+
   <div id="click-me">
-    💼<br>click those links to see our portfolios!<br>💼
+    <img src=""></img>
+  </div>
+
+  <div class="projects">
+    PROJECTS PROJECTS PROJECTS PROJECTS PROJECTS PROJECTS PROJECTS PROJECTS PROJECTS PROJECTS PROJECTS PROJECTS
   </div>
 
   <script src="js/sketch_01.js"></script>
   <script>
-    $(document).ready(() => $('.header').lettering());
+    $('.main-carousel').flickity({
+      // options
+      cellAlign: 'left',
+      contain: true,
+      wrapAround: true
+    });
   </script>
 </body>
 

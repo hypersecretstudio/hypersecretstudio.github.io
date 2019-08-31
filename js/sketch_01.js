@@ -37,48 +37,36 @@ window.onmousemove = event => {
   const popup = document.getElementById('click-me');
   const h = popup.getBoundingClientRect().height;
   const w = popup.getBoundingClientRect().width;
-  popup.style.top = (posy - (h * 1.2)) + 'px';
+  popup.style.top = (posy - (h * 1.01)) + 'px';
   popup.style.left = (posx - (w / 2)) + 'px';
-}
 
+
+
+  mx += map(mouseX, 0, width, 0, 100);
+  my += map(mouseY, 0, height, 0, 100);
+}
+// document.getElementById('impressum')
 const links = document.getElementsByClassName('links');
 for (const link of links) {
+  link.addEventListener('mouseenter', event => {
+    console.log(event.target.dataset.img);
+
+    const img = document.querySelector('#click-me img');
+    img.src = event.target.dataset.img;
+    // iframe.setAttribute('src', event.target.href)
+
+  })
   link.addEventListener('mouseover', event => {
     showLinkDescription = true;
     document.getElementById('click-me').style.display = 'block';
   })
-  link.addEventListener('mouseleave', event =>{
+  link.addEventListener('mouseleave', event => {
     showLinkDescription = false;
-  
+
     document.getElementById('click-me').style.display = 'none';
   })
 }
 
-
-
-// let index = 0;
-// selectedText = '';
-// write = true;
-// selectedText = SPOOKY_TEXT.split('');
-// if (selectedText != '') {
-//   SI = setInterval(() => {
-//     let myDiv = document.getElementById('spooky-text');
-//     if (write) {
-//       let letter = selectedText[index];
-//       if (letter === NEW_LINE) letter = '<br>'
-//       myDiv.innerHTML += letter;
-//       myDiv.scrollTop = myDiv.scrollHeight;
-//       index++;
-//     }
-//     if (index >= selectedText.length) {
-//       write = false;
-//       setTimeout(() => {
-//         clearInterval(SI);
-//       }, 2000);
-//     }
-//   }, 100);
-
-// }
 
 
 
@@ -109,7 +97,7 @@ function preload() {
   uniformsShader = loadShader('vertex.vert', 'drip.frag');
 }
 function setup() {
-  cnv = createCanvas(innerWidth, innerHeight, WEBGL);
+  cnv = createCanvas(innerWidth + 10, innerHeight + 10, WEBGL);
   cnv.parent('p5Sketch');
   noStroke();
   rectMode(CENTER);
@@ -124,8 +112,10 @@ function setup() {
     isMobile = false;
   }
 }
-
+let counter = 0;
+const inc = Math.PI / 1000;
 function draw() {
+  counter += inc;
   background(20, 20, 220);
 
 
@@ -137,18 +127,16 @@ function draw() {
   shader(uniformsShader);
   rect(0, 0, width, height);
   pop();
-  if (isMobile) {
-    // if is mobile than we track the device rotation
-    // console.log('SX ' + sx);
-    // console.log('SY ' + sy);
-    mx = constrain(map(sx, -9, 9, 0, 1), 0, 1);
-    my = constrain(map(sy, -9, 9, 0, 1), 0, 1);
-    // console.log(mx, my);
-  } else {
-    // we track the mouse
-    mx = map(mouseX, 0, width, 0, 1);
-    my = map(mouseY, 0, height, 0, 1);
-  }
+  // if (isMobile) {
+  // if is mobile than we track the device rotation
+  // console.log('SX ' + sx);
+  // console.log('SY ' + sy);
+  mx = constrain(map(sin(counter), -1, 1, 0, 1), 0, 1);
+  my = constrain(map(cos(counter), -1, 1, 0, 1), 0, 1);
+  // console.log(mx, my);
+  // } else {
+  // we track the mouse
+  // }
   // lets just send frameCount to the shader as a way to control animation over time
   uniformsShader.setUniform('u_time', millis() / 1000);
   uniformsShader.setUniform('u_resolution', [width, height]);
@@ -187,6 +175,9 @@ function draw() {
 
 function windowResized() {
   resizeCanvas(innerWidth, innerHeight, WEBGL);
+}
+
+function mouseMoved() {
 }
 
 function ballInHOOP(start) {
@@ -232,14 +223,9 @@ function returnRGBcolor() {
   let color2 = [];
   let x;
   let y;
-  if (isMobile) {
 
-    x = map(mx, 0, 1, 0, 255);
-    y = map(my, 0, 1, 0, 255);
-  } else {
-    x = map(mouseX, 0, width, 0, 255);
-    y = map(mouseY, 0, height, 0, 255);
-  }
+  x = map(mx, 0, 1, 0, 255);
+  y = map(my, 0, 1, 0, 255);
   // if is color mode
   colorMode(HSB);
 
