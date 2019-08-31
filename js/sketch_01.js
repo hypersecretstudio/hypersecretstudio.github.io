@@ -49,11 +49,9 @@ window.onmousemove = event => {
 const links = document.getElementsByClassName('links');
 for (const link of links) {
   link.addEventListener('mouseenter', event => {
-    console.log(event.target.dataset.img);
 
     const img = document.querySelector('#click-me img');
     img.src = event.target.dataset.img;
-    // iframe.setAttribute('src', event.target.href)
 
   })
   link.addEventListener('mouseover', event => {
@@ -132,7 +130,7 @@ function draw() {
   // console.log('SX ' + sx);
   // console.log('SY ' + sy);
   mx = constrain(map(sin(counter), -1, 1, 0, 1), 0, 1);
-  my = constrain(map(cos(counter), -1, 1, 0, 1), 0, 1);
+  my = constrain(map(cos(counter * 2), -1, 1, 0, 1), 0, 1);
   // console.log(mx, my);
   // } else {
   // we track the mouse
@@ -141,8 +139,8 @@ function draw() {
   uniformsShader.setUniform('u_time', millis() / 1000);
   uniformsShader.setUniform('u_resolution', [width, height]);
   //drip uniforms
-  uniformsShader.setUniform('intense', 0.5);
-  uniformsShader.setUniform('speed', 1.0);
+  uniformsShader.setUniform('intense', 0.9);
+  uniformsShader.setUniform('speed', 2.0);
   uniformsShader.setUniform('graininess', [mx, my]);
   uniformsShader.setUniform('u_mouse1', returnRGBcolor()[0]);
   uniformsShader.setUniform('u_mouse2', returnRGBcolor()[1]);
