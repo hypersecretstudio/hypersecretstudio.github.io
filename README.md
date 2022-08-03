@@ -1,1 +1,1 @@
-# [hypersecret.studio](https://kapzmgvype.cyon.link/)
+# [hypersecret.studio](https://hypersecret.studio)
